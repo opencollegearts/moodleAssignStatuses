@@ -1,0 +1,83 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_assignstatuses/assignments_list
+
+    List of course assignments with submission and grading status icons.
+
+    Context variables required for this template:
+    * hasassignments - whether any assignments are visible
+    * assignments - array of assignment rows
+    * noassignments - empty-state message
+    * headerassignment / headersubmission / headergrading - column labels
+
+    Example context (json):
+    {
+        "hasassignments": true,
+        "noassignments": "There are no assignments in this course.",
+        "headerassignment": "Assignment",
+        "headersubmission": "Submission",
+        "headergrading": "Grading",
+        "assignments": [
+            {
+                "name": "Essay 1",
+                "url": "https://example.com/mod/assign/view.php?id=1",
+                "submissionicon": "i/submitted",
+                "submissioncomponent": "block_assignstatuses",
+                "submissionlabel": "Submitted for grading",
+                "submissionclass": "block-assignstatuses-status-submitted",
+                "haslate": false,
+                "gradingicon": "i/notgraded",
+                "gradingcomponent": "block_assignstatuses",
+                "gradinglabel": "Not graded",
+                "gradingclass": "block-assignstatuses-status-notgraded"
+            }
+        ]
+    }
+}}
+<div class="block-assignstatuses">
+    {{#hasassignments}}
+        <ul class="block-assignstatuses-list list-unstyled mb-0">
+            {{#assignments}}
+                <li class="block-assignstatuses-item">
+                    <a class="block-assignstatuses-name" href="{{url}}">{{{name}}}</a>
+                    <div class="block-assignstatuses-statuses" role="group" aria-label="{{name}}">
+                        <span class="block-assignstatuses-status {{submissionclass}}"
+                              title="{{headersubmission}}: {{submissionlabel}}">
+                            {{#pix}}{{submissionicon}}, {{submissioncomponent}}, {{submissionlabel}}{{/pix}}
+                            <span class="sr-only">{{headersubmission}}: {{submissionlabel}}</span>
+                            {{#haslate}}
+                                <span class="block-assignstatuses-late" title="{{latelabel}}">
+                                    {{#pix}}{{lateicon}}, {{latecomponent}}, {{latelabel}}{{/pix}}
+                                    <span class="sr-only">{{latelabel}}</span>
+                                </span>
+                            {{/haslate}}
+                        </span>
+                        <span class="block-assignstatuses-status {{gradingclass}}"
+                              title="{{headergrading}}: {{gradinglabel}}">
+                            {{#pix}}{{gradingicon}}, {{gradingcomponent}}, {{gradinglabel}}{{/pix}}
+                            <span class="sr-only">{{headergrading}}: {{gradinglabel}}</span>
+                        </span>
+                    </div>
+                </li>
+            {{/assignments}}
+        </ul>
+    {{/hasassignments}}
+    {{^hasassignments}}
+        <p class="block-assignstatuses-empty mb-0">{{noassignments}}</p>
+    {{/hasassignments}}
+</div>

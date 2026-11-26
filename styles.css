@@ -1,0 +1,49 @@
+/* Assignment statuses block */
+
+.block-assignstatuses-list {
+    margin: 0;
+    padding: 0;
+}
+
+.block-assignstatuses-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.block-assignstatuses-item:last-child {
+    border-bottom: 0;
+}
+
+.block-assignstatuses-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.block-assignstatuses-statuses {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.block-assignstatuses-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.block-assignstatuses-status .icon {
+    margin: 0;
+}
+
+.block-assignstatuses-empty {
+    color: #6a6a6a;
+    font-size: 0.875rem;
+}
